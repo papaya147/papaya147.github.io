@@ -1,0 +1,23 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    padding: 14px 0;
+}
+
+.navbar a {
+    margin: 10px;
+    padding: 14px 20px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #c6c7ff;
+    border-radius: 64px;
+}
+
+.navbar a.active {
+    background-color: #c6c7ff;
+    border-radius: 64px;
+}

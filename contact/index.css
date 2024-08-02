@@ -1,0 +1,85 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+a {
+    max-width: 33%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.content {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.contact-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-header img {
+    width: 10%;
+}
+
+.contact-header h3 {
+    margin: 3%;
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.card {
+    position: relative;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /*overflow: hidden;*/
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card p {
+    font-size: 16px;
+    text-underline: black;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.arrow {
+    position: absolute;
+    top: calc(50% - 15px);
+    right: calc(50% - 15px);
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.card:hover .arrow {
+    opacity: 1;
+    z-index: 1;
+}
+
+.card-content {
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.card-content:hover {
+    filter: blur(3px);
+}
