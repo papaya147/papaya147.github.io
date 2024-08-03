@@ -1,0 +1,27 @@
+.content {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.content a {
+    text-decoration: none;
+    color: #7038ff;
+    margin-right: 10px;
+    transition: color 0.3s;
+}
+
+.content a:hover {
+    color: #c6c7ff;
+}
+
+.section-heading {
+    text-align: left; /* Align the heading to the left */
+    margin-bottom: 10px; /* Add space between the heading and the cards */
+    font-size: 2em;
+}
+
+.section-subheading {
+    text-align: left; /* Align the heading to the left */
+    margin-bottom: 0; /* Add space between the heading and the cards */
+    font-size: 1.25em;
+}
