@@ -1,30 +1,36 @@
 /* styles for sub folders */
 .wrapper {
     display: flex;
+    height: calc(100vh - 140px);
 }
 
-.right-sidebar {
-    width: 17%;
-    position: sticky;
-    padding: 20px 3% 50px;
-    top: 0;
-    height: 100vh;
+.left-sidebar, .right-sidebar, .project-content {
+    padding-top: 0;
     overflow-y: auto;
     scrollbar-width: none;
+    height: calc(100vh - 135px);
 }
 
-.right-sidebar::-webkit-scrollbar {
+.right-sidebar, .left-sidebar {
+    width: 17%;
+    position: sticky;
+    padding: 0 3%;
+    scrollbar-width: none;
+    overflow-y: auto;
+}
+
+.right-sidebar::-webkit-scrollbar, .left-sidebar::-webkit-scrollbar, .project-content::-webkit-scrollbar {
     display: none;
 }
 
-.right-sidebar h1 {
-    margin-top: 20px;
+.right-sidebar h1, .left-sidebar h1 {
+    margin-top: 0;
     margin-bottom: 10px;
     font-size: 1.5em;
     font-weight: 700;
 }
 
-.right-sidebar .section-heading {
+.right-sidebar .section-heading, .left-sidebar .section-heading {
     display: block;
     color: #7038ff;
     padding: 10px 0 5px;
@@ -35,7 +41,17 @@
     transition: 0.3s;
 }
 
-.right-sidebar a {
+.right-sidebar .section-subheading, .left-sidebar .section-subheading {
+    display: block;
+    color: #7038ff;
+    padding: 5px 0;
+    text-decoration: none;
+    font-weight: 300;
+    margin: 0 0 0 25px;
+    transition: 0.3s;
+}
+
+.right-sidebar a, .left-sidebar a {
     display: block;
     color: #7038ff;
     padding: 5px 0;
@@ -46,63 +62,22 @@
     transition: 0.3s;
 }
 
-.right-sidebar a:hover {
+.right-sidebar a:hover, .left-sidebar a:hover {
     color: #c6c7ff;
-}
-
-.left-sidebar {
-    width: 17%;
-    padding: 20px 3% 50px;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-}
-
-.left-sidebar h1 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 1.5em;
-    font-weight: 700;
-}
-
-.left-sidebar .section-heading {
-    display: block;
-    color: #7038ff;
-    padding: 10px 0 5px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.2em;
-    margin: 0 0 0 10px;
-    transition: 0.3s;
-}
-
-.left-sidebar .section-subheading {
-    display: block;
-    color: #7038ff;
-    padding: 5px 0;
-    text-decoration: none;
-    font-weight: 300;
-    margin: 0 0 0 25px;
-    transition: 0.3s;
-}
-
-.left-sidebar a:hover {
-    color: #c6c7ff;
-}
-
-.project-content {
-    width: 60%;
-    padding-top: 40px;
-    background-color: white;
-    margin: 0;
-    overflow-y: auto;
 }
 
 p {
     margin: 0;
     line-height: 2;
     /*text-align: justify;*/
+}
+
+.project-content {
+    width: 60%;
+    background-color: white;
+    margin: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
 .project-content .section-heading {
