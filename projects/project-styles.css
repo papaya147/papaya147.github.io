@@ -1,0 +1,77 @@
+/*styles for sub folders*/
+.wrapper {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 20%;
+    padding-left: 40px;
+    padding-top: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar a:hover {
+    color: #c6c7ff;
+    padding-left: 15px; /* Small indent to indicate hover */
+}
+
+.sidebar h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.sidebar .section-heading {
+    display: block;
+    color: #7038ff;
+    padding: 10px 0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2em;
+    margin-left: 10px;
+    transition: color 0.3s, padding-left 0.3s;
+}
+
+.sidebar .section-subheading {
+    display: block;
+    color: #7038ff;
+    padding: 10px 0;
+    text-decoration: none;
+    font-weight: 300;
+    margin-left: 25px;
+    transition: color 0.3s, padding-left 0.3s;
+}
+
+.content {
+    width: 60%;
+    padding-top: 40px;
+    background-color: #fff; /* White background for content */
+    margin: 0;
+    overflow-y: auto;
+}
+
+p {
+    margin: 0;
+    line-height: 2;
+    text-align: justify;
+}
+
+.content .section-heading {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 2em;
+    color: #4d5b7c;
+}
+
+.content .section-subheading {
+    text-align: left;
+    margin-bottom: 0;
+    font-size: 1.25em;
+    color: #4d5b7c;
+}
