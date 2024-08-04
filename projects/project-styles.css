@@ -91,10 +91,10 @@
     color: #c6c7ff;
 }
 
-.content {
+.project-content {
     width: 60%;
     padding-top: 40px;
-    background-color: #fff; /* White background for content */
+    background-color: white;
     margin: 0;
     overflow-y: auto;
 }
@@ -105,7 +105,7 @@ p {
     /*text-align: justify;*/
 }
 
-.content .section-heading {
+.project-content .section-heading {
     text-align: left;
     margin-top: 0;
     margin-bottom: 10px;
@@ -113,7 +113,7 @@ p {
     color: #4d5b7c;
 }
 
-.content .section-subheading {
+.project-content .section-subheading {
     text-align: left;
     margin-bottom: 0;
     font-size: 1.25em;
