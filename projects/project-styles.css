@@ -67,9 +67,9 @@
 }
 
 p {
-    margin: 0;
     line-height: 2;
     /*text-align: justify;*/
+    margin: 0 0 16px;
 }
 
 .project-content {
@@ -93,4 +93,14 @@ p {
     margin-bottom: 0;
     font-size: 1.25em;
     color: #4d5b7c;
+}
+
+.image-container {
+    padding: 10px;
+    text-align: center; /* Center the content horizontally */
+}
+
+.image-container img {
+    max-width: 100%; /* Ensure the image scales responsively */
+    height: auto; /* Maintain aspect ratio */
 }

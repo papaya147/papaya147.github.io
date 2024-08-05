@@ -30,32 +30,124 @@
       <p>Wynter's Dreams</p>
 
       <h2 class="section-subheading">Duration</h2>
-      <p></p>
+      <p>August 2023 - March 2024</p>
 
       <h2 class="section-subheading">Role</h2>
       <p>Backend Developer</p>
 
       <h2 class="section-subheading">Project Description</h2>
-      <p></p>
-
+      <p>
+        Wynter's Dreams is an interactive platform designed to bring children's books to life. The website allows users
+        to explore stories where each page can lead to different paths, creating a dynamic reading experience. I worked
+        on the backend, developing robust systems for user creation and management, and built an admin dashboard where
+        administrators can easily upload and manage books, blogs, and testimonials. To support the interactive nature of
+        the books, each page is stored in a JSON object format, allowing seamless navigation through the story. This
+        project highlights my expertise in backend development, focusing on user management and dynamic content
+        delivery.
+      </p>
 
       <h1 class="section-heading">Architecture & Design</h1>
       <h2 class="section-subheading">Overview</h2>
+      <div class="image-container">
+        <img src="rendered/overview.svg" alt="Wynter's Dreams Architecture Overview" />
+      </div>
       <p>
-
+        The architecture of Wynter's Dreams emphasizes scalability, security, and efficiency to provide a seamless
+        interactive experience. The backend, built in Go, handles core functionalities such as user management and
+        content delivery, leveraging Go’s performance and concurrency.
+      </p>
+      <p>
+        PostgreSQL manages metadata for books, blogs, and users, while Amazon S3 stores book content, images, and JSON
+        objects. This separation ensures efficient data handling and high performance.
+      </p>
+      <p>
+        User authentication uses a simple username and password, with authorization handled by PASETO tokens for secure
+        access control. A load balancer with TLS termination routes traffic to backend services and manages SSL
+        certificates, ensuring encrypted data transfer.
+      </p>
+      <p>
+        The frontend communicates with the backend via REST APIs, accessing metadata from PostgreSQL and content from S3
+        to deliver an engaging user experience. This setup supports robust and flexible growth with minimal disruption.
       </p>
 
       <h2 class="section-subheading">Scalability & Performance</h2>
       <p>
-
+        Wynter's Dreams is designed for high performance and scalability. The backend, built in Go, utilizes its strong
+        concurrency features to efficiently handle multiple requests through lightweight goroutines, ensuring fast and
+        reliable processing.
+      </p>
+      <p>
+        For scalability, the system uses Docker containers orchestrated by AWS Elastic Container Service (ECS). ECS
+        automates the deployment and scaling of containers, adjusting the number of instances based on traffic demands.
+        The load balancer with TLS termination distributes incoming requests across these instances, enhancing fault
+        tolerance and resource utilization.
+      </p>
+      <p>
+        This combination of Go’s concurrency, Docker-based scaling, and AWS ECS automation ensures that Wynter’s Dreams
+        can handle growing traffic and data demands effectively while maintaining optimal performance.
       </p>
 
       <h2 class="section-subheading">Security</h2>
+      <div class="image-container">
+        <img src="rendered/security.svg" alt="Wynter's Dreams Architecture Security" />
+      </div>
+      <p>
+        The security of Wynter's Dreams is a top priority, with multiple layers of protection implemented to safeguard
+        data and communications. All data stored in PostgreSQL and Amazon S3 is encrypted at rest, ensuring that
+        sensitive information remains secure from unauthorized access. The load balancer employs TLS to encrypt all data
+        in transit, protecting it from potential interception during transmission.
+      </p>
+      <p>
+        Additionally, all communication between backend services occurs within a private cloud environment, further
+        isolating and securing internal data exchanges. This multi-faceted approach ensures robust protection for both
+        data at rest and in transit.
+      </p>
+
+      <h2 class="section-subheading">Deployment & Monitoring</h2>
+      <div class="image-container">
+        <img src="rendered/monitoring.svg" alt="Wynter's Dreams Architecture Monitoring" />
+      </div>
+      <p>
+        Deployment for Wynter's Dreams is managed using AWS Elastic Container Service (ECS), which facilitates automated
+        scaling and orchestration of Docker containers. ECS handles the deployment of application containers, scaling
+        them up or down based on real-time traffic demands, and ensures smooth and efficient management of containerized
+        services.
+      </p>
+      <p>
+        For monitoring, AWS CloudWatch is employed to track and analyze logs generated by the application. CloudWatch
+        provides detailed insights into system performance and operational health, enabling proactive identification and
+        resolution of issues. This integration ensures that the platform remains robust and performs optimally, with
+        continuous monitoring and logging to support effective management and troubleshooting.
+      </p>
+
+      <h1 class="section-heading">Implementation Details</h1>
+      <h2 class="section-subheading">Challenges Faced</h2>
       <p>
 
       </p>
 
-      <h2 class="section-subheading">Deployment & Monitoring</h2>
+      <h2 class="section-subheading">Key Features</h2>
+      <p>
+
+      </p>
+
+      <h2 class="section-subheading">Performance Optimisation</h2>
+      <p>
+
+      </p>
+
+      <h1 class="section-heading">Testing & Deployment</h1>
+      <h2 class="section-subheading">Testing Strategies</h2>
+      <p>
+
+      </p>
+
+      <h2 class="section-subheading">Deployment Automation</h2>
+      <p>
+
+      </p>
+
+      <h2 class="section-subheading">Deployment Details</h2>
       <p>
 
       </p>
