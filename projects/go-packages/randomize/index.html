@@ -5,8 +5,13 @@
   <title>Projects</title>
   <link rel="icon" type="image/x-icon" href="/images/favicon.png">
   <link rel="stylesheet" href="../../../index.css">
+  <link rel="stylesheet" href="../../project-styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="../../project-content.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
 </head>
 <body>
 <div class="navbar">
@@ -17,8 +22,243 @@
 </div>
 
 <div class="content">
-  <h1>Welcome to My Portfolio</h1>
-  <p>Projects page.</p>
-</div>
+  <div class="wrapper">
+    <div class="left-sidebar">
+      <h1>Contents</h1>
+    </div>
+
+    <div class="project-content">
+      <h1 class="section-heading">Package Overview</h1>
+      <h2 class="section-subheading">Package Name</h2>
+      <p>Randomize</p>
+
+      <h2 class="section-subheading">Purpose</h2>
+      <p>A Go package to generate random values from input types.</p>
+
+      <h2 class="section-subheading">Development Duration</h2>
+      <p>May 2024 - July 2024</p>
+
+      <h1 class="section-heading">Design & Implementation</h1>
+      <h2 class="section-subheading">Overview</h2>
+      <p>
+        The randomize package is a Go library designed to simplify the process of generating random values for any Go
+        type, including complex nested structures. The primary inspiration behind this package was to make testing
+        easier and more efficient by automating the creation of realistic, random data for various data types.
+      </p>
+
+      <h2 class="section-subheading">Core Features</h2>
+      <ul>
+        <li>
+          <strong>Automated Random Data Generation</strong>:
+          Instantly generates random values for any Go type, reducing the need for manual data creation.
+        </li>
+        <li>
+          <strong>Support for Nested Structures</strong>:
+          Handles complex, nested types, populating all subfields with random data.
+        </li>
+        <li>
+          <strong>Custom Randomizers</strong>:
+          Allows custom random value generation for user-defined types, tailored to specific needs.
+        </li>
+        <li>
+          <strong>Configurable Parameters</strong>:
+          Customize the length of generated strings, slices, and maps to suit your testing requirements.
+        </li>
+        <li>
+          <strong>Streamlined Testing</strong>:
+          Simplifies testing by automating data generation, reducing boilerplate, and speeding up development.
+        </li>
+        <li>
+          <strong>Broad Type Coverage</strong>:
+          Supports a wide range of Go types, making it versatile for various testing scenarios.
+        </li>
+      </ul>
+
+      <h2 class="section-subheading">Key Components</h2>
+      <pre>
+        <code class="language-go">
+package randomize
+
+// Do generates a random value of type T with error handling.
+func Do[T any]() (T, error) {
+}
+
+// Must generates a random value of type T and panics on errors.
+func Must[T any]() T {
+}
+
+// RegisterCustomRandomizer registers a custom randomizer for a specific type.
+func RegisterCustomRandomizer[T any](f func() T) {
+}
+
+// SetStringLength sets the length for generated strings.
+func SetStringLength(l int) {
+}
+
+// SetSliceLength configures the length for generated slices.
+func SetSliceLength(l int) {
+}
+
+// SetMapLength defines the number of key-value pairs in generated maps.
+func SetMapLength(l int) {
+}
+        </code>
+      </pre>
+
+      <h2 class="section-subheading">Usage Examples</h2>
+      <pre>
+        <code class="language-go">
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+
+	"github.com/google/uuid"
+	"github.com/papaya147/randomize"
+)
+
+type MySubStruct struct {
+	Field11 float32
+	Field2  *float64
+}
+
+type MyStruct struct {
+	Field1 int
+	Field2 string
+	Field3 MySubStruct
+}
+
+type StudentDegree string
+
+const (
+	StudentDegreeBachelors StudentDegree = "bachelors"
+	StudentDegreeMasters   StudentDegree = "masters"
+	StudentDegreeDoctorate StudentDegree = "doctorate"
+)
+
+func randomStudentDegree() StudentDegree {
+	r := rand.New(rand.NewSource(time.Now().UnixMilli()))
+	degrees := []StudentDegree{
+		StudentDegreeBachelors,
+		StudentDegreeMasters,
+		StudentDegreeDoctorate,
+	}
+	return degrees[r.Intn(len(degrees))]
+}
+
+func main() {
+	// Set custom lengths for generated strings, slices, and maps
+	randomize.SetStringLength(10) // defaults to 10
+	randomize.SetSliceLength(3)   // defaults to 5
+	randomize.SetMapLength(3)     // defaults to 5
+
+	// Generate a random integer
+	a := randomize.Must[int]()
+	fmt.Println(a)
+	// Example output: 5530747941541261317
+
+	// Generate a random UUID
+	b := randomize.Must[uuid.UUID]()
+	fmt.Println(b)
+	// Example output: 2e0b778b-b872-1827-584c-6b72e340089b
+
+	// Generate a random struct with nested fields
+	c := randomize.Must[MyStruct]()
+	fmt.Println(c)
+	// Example output: {6687195844413792927 czuuqhecce {0.78019506 0x1400012a168}}
+
+	// Generate a random pointer to a string
+	d := randomize.Must[*string]()
+	fmt.Println(d)
+	// Example output: 0x14000112100
+	fmt.Println(*d)
+	// Example output: hsazbxhwmm
+
+	// Generate a random slice of integers
+	e := randomize.Must[[]int]()
+	fmt.Println(e)
+	// Example output: [8919747130222607929 7070119811876138339 2708903612550929244]
+
+	// Generate a random map of string to int8
+	f := randomize.Must[map[string]int8]()
+	fmt.Println(f)
+	// Example output: map[tzjrnumodm:101 unjyttnfhm:-88 vlycruzfue:-118]
+
+	// Generate a random array of 4 uint8 values
+	g := randomize.Must[[4]uint8]()
+	fmt.Println(g)
+	// Example output: [55 187 78 179]
+
+	// Register and use a custom randomizer for a user-defined type
+	randomize.RegisterCustomRandomizer[StudentDegree](randomStudentDegree)
+	h := randomize.Must[StudentDegree]()
+	fmt.Println(h)
+	// Example output: bachelors
+}
+        </code>
+      </pre>
+
+      <h1 class="section-heading">Usage</h1>
+      <h2 class="section-subheading">Installation & Setup</h2>
+      <pre>
+        <code class="language-shell">
+mkdir my-go-project
+cd my-go-project
+go mod init my-go-project
+go get github.com/papaya147/randomize
+        </code>
+      </pre>
+
+      <h1 class="section-heading">Challenges & Learnings</h1>
+      <h2 class="section-subheading">Challenges Faced</h2>
+      <p>
+        During the development of the randomize package, I faced significant challenges with custom types. Designing the
+        package to accurately generate random values for user-defined types required careful planning and extensive
+        testing. It was complex to ensure that the package could handle various custom structures and types dynamically
+        while maintaining both flexibility and correctness.
+      </p>
+      <p>
+        Implementing reflection was another major challenge, especially since this was my first project involving
+        reflection to this extent. Managing type information and manipulating types at runtime through reflection added
+        a layer of complexity that required a deep dive into Go's reflection capabilities. It involved a steep learning
+        curve, but it was crucial for ensuring that the package worked as intended.
+      </p>
+
+      <h2 class="section-subheading">Lessons Learned</h2>
+      <ul>
+        <li>
+          <strong>Custom Types</strong>: I learned to thoroughly design and test for custom types, ensuring accurate
+          random value generation and handling edge cases effectively.
+        </li>
+        <li>
+          <strong>Reflection Mastery</strong>: I gained a deeper understanding of Go's reflection capabilities, learning
+          to use it cautiously and efficiently while managing its complexities.
+        </li>
+        <li>
+          <strong>Dynamic Type Handling</strong>: I discovered the importance of flexibility in handling various types,
+          adapting to different scenarios with robust design.
+        </li>
+        <li>
+          <strong>Error Handling</strong>: I emphasized the need for strong error handling and validation to ensure
+          reliable and valid outputs across different conditions.
+        </li>
+      </ul>
+
+      <h1 class="section-heading">Future Improvements</h1>
+      <h2 class="section-subheading">Planned Enhancements</h2>
+      <ul>
+        <li>
+          <strong>Custom Type Methods</strong>: Automatically generate random values for custom type methods to simplify
+          usage and reduce manual work.
+        </li>
+        <li>
+          <strong>Unexported Fields Handling</strong>: Improve random value generation for unexported fields and types
+          like time.Time for better coverage and accuracy.
+        </li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
