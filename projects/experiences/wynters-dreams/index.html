@@ -9,6 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
   <script src="../../project-content.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+
 </head>
 <body>
 <div class="navbar">
@@ -76,6 +80,9 @@
         concurrency features to efficiently handle multiple requests through lightweight goroutines, ensuring fast and
         reliable processing.
       </p>
+      <div class="image-container">
+        <img src="rendered/scalability.svg" alt="Wynter's Dreams Architecture Scalability" />
+      </div>
       <p>
         For scalability, the system uses Docker containers orchestrated by AWS Elastic Container Service (ECS). ECS
         automates the deployment and scaling of containers, adjusting the number of instances based on traffic demands.
@@ -123,7 +130,45 @@
       <h1 class="section-heading">Implementation Details</h1>
       <h2 class="section-subheading">Challenges Faced</h2>
       <p>
+        One significant challenge was devising an efficient method to index and manage book images, given that there
+        isn’t a straightforward, direct flow between the images and their associated books. Initially, linking images to
+        books and ensuring they were retrieved and displayed correctly posed difficulties due to the complex
+        relationships and lack of a unified schema. To address this, I designed a custom indexing system where metadata
+        about each image was stored alongside book data in PostgreSQL. This system included a unique identifier for each
+        image, which was then used to establish a clear association between the images and their respective books.
+        I also implemented a structured naming convention and organised the images in S3 with directory-like
+        structures to facilitate efficient retrieval and management.
+      </p>
+      <p>Go model I ended up with:</p>
+      <pre>
+        <code class="language-go">
+type BookPaging struct {
+	BookId string   `json:"book_id"`
+	Paging []Paging `json:"paging"`
+}
 
+type Paging struct {
+	Chapter    string   `json:"chapter"`
+	Heading    string   `json:"heading"`
+	Text       string   `json:"text"`
+	Buttons    []Button `json:"buttons"`
+	EndChapter bool     `json:"end_chapter"`
+	Image      string   `json:"image"`
+}
+
+type Button struct {
+	Text             string `json:"text"`
+	NextChapter      string `json:"next_chapter"`
+	NextChapterIndex int    `json:"next_chapter_index"`
+}
+        </code>
+      </pre>
+      <p>
+        Integrating CCAvenue for payment processing in Go proved challenging due to the lack of direct support and
+        documentation for Go. The primary difficulty was implementing the required encryption and decryption protocols
+        for secure communication with CCAvenue’s API. To overcome this, I wrote custom code to handle the specific
+        encryption methods mandated by CCAvenue. This involved creating encryption routines to securely transmit payment
+        information and implementing decryption logic to process responses from CCAvenue.
       </p>
 
       <h2 class="section-subheading">Key Features</h2>
