@@ -5,8 +5,13 @@
   <title>Projects</title>
   <link rel="icon" type="image/x-icon" href="/images/favicon.png">
   <link rel="stylesheet" href="../../../index.css">
+  <link rel="stylesheet" href="../../project-styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="../../project-content.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
 </head>
 <body>
 <div class="navbar">
@@ -17,8 +22,214 @@
 </div>
 
 <div class="content">
-  <h1>Welcome to My Portfolio</h1>
-  <p>Projects page.</p>
+  <div class="wrapper">
+    <div class="left-sidebar">
+      <h1>Contents</h1>
+    </div>
+
+    <div class="project-content">
+      <h1 class="section-heading">Package Overview</h1>
+      <h2 class="section-subheading">Package Name</h2>
+      <p>Parallelize</p>
+
+      <h2 class="section-subheading">Purpose</h2>
+      <p>
+        Parallelize your Go code with ease. This package abstracts away the direct use of channels and sync wait
+        groups.
+      </p>
+
+      <h2 class="section-subheading">Development Duration</h2>
+      <p>April 2024 - April 2024</p>
+
+      <h1 class="section-heading">Design & Implementation</h1>
+      <h2 class="section-subheading">Overview</h2>
+      <p>
+        The parallelize package provides a simplified interface for running multiple functions concurrently in Go,
+        eliminating the need for developers to manually manage synchronization using sync.WaitGroup or channels. By
+        abstracting these complexities, parallelize allows users to easily group tasks and execute them in parallel with
+        minimal boilerplate code.
+      </p>
+
+      <h2 class="section-subheading">Core Features</h2>
+      <ul>
+        <li>
+          <strong>Parallel Execution</strong>:
+          Easily execute multiple functions concurrently without manually handling goroutines and synchronization.
+        </li>
+        <li>
+          <strong>Group-Based Management</strong>:
+          Organize and manage tasks in a Group, enabling batch execution of related functions.
+        </li>
+        <li>
+          <strong>Flexible Task Addition</strong>:
+          Add tasks with or without input arguments and output results, providing versatility for various use cases.
+        </li>
+        <li>
+          <strong>Automatic Synchronization</strong>:
+          Automatically manages synchronization using sync.WaitGroup, ensuring all tasks complete before returning.
+        </li>
+        <li>
+          <strong>Context Support</strong>:
+          Integrate context.Context into task execution, allowing for cancellation and timeout control.
+        </li>
+        <li>
+          <strong>Abstraction of Concurrency</strong>:
+          Abstracts away the complexity of concurrency in Go, simplifying the development of parallelized code.
+        </li>
+      </ul>
+
+      <h2 class="section-subheading">Key Components</h2>
+      <pre>
+  <code class="language-go">
+package parallelize
+
+// NewGroup creates a new group for parallel execution.
+func NewGroup() *Group {
+}
+
+// Execute runs all tasks in the group concurrently.
+func (g *Group) Execute() {
+}
+
+// AddWithOutputWithArgs adds a task with output and arguments to the group.
+func AddWithOutputWithArgs[I, O any](group *Group, f WithOutputWithArgsSignature[I, O], ctx context.Context, input I) WithOutputWithArgsChannels[O] {
+}
+
+// AddWithOutputWithoutArgs adds a task with output and no arguments to the group.
+func AddWithOutputWithoutArgs[O any](group *Group, f WithOutputWithoutArgsSignature[O], ctx context.Context) WithOutputWithoutArgsChannels[O] {
+}
+
+// AddWithoutOutputWithArgs adds a task without output but with arguments to the group.
+func AddWithoutOutputWithArgs[I any](group *Group, f WithoutOutputWithArgsSignature[I], ctx context.Context, input I) WithoutOutputWithArgsChannels {
+}
+
+// AddWithoutOutputWithoutArgs adds a task without output and no arguments to the group.
+func AddWithoutOutputWithoutArgs(group *Group, f WithoutOutputWithoutArgsSignature, ctx context.Context) WithoutOutputWithoutArgsChannels {
+}
+
+// Read retrieves the output of a task from its channels.
+func (c WithOutputWithArgsChannels[O]) Read() (O, error) {
+}
+
+// Read retrieves the output of a task from its channels.
+func (c WithOutputWithoutArgsChannels[O]) Read() (O, error) {
+}
+
+// Read checks for completion of a task without output.
+func (c WithoutOutputWithArgsChannels) Read() error {
+}
+
+// Read checks for completion of a task without output.
+func (c WithoutOutputWithoutArgsChannels) Read() error {
+}
+  </code>
+</pre>
+
+      <h2 class="section-subheading">Usage Examples</h2>
+      <pre>
+        <code class="language-go">
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/papaya147/parallelize"
+)
+
+func add(_ context.Context, args []int) (int, error) {
+	var sum int = 0
+	for _, v := range args {
+		sum += v
+	}
+	return sum, nil
+}
+
+func multiply(_ context.Context, args []int) (int, error) {
+	var product int = 1
+	for _, v := range args {
+		product *= v
+	}
+	return product, nil
+}
+
+func main() {
+	g := parallelize.NewGroup()
+
+	// add methods to the group
+	res1 := parallelize.AddWithOutputWithArgs(g, add, context.Background(), []int{1, 2, 3, 4})
+	res2 := parallelize.AddWithOutputWithArgs(g, multiply, context.Background(), []int{1, 2, 3, 4})
+
+	// execute the group using go routines
+	g.Execute()
+
+	// extract outputs and use them!
+	sum, err := res1.Read()
+	if err != nil {
+		panic(err)
+	}
+
+	prod, err := res2.Read()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Sum is %d\n", sum)      // Sum is 10
+	fmt.Printf("Product is %d\n", prod) // Product is 24
+}
+        </code>
+      </pre>
+
+      <h1 class="section-heading">Usage</h1>
+      <h2 class="section-subheading">Installation & Setup</h2>
+      <pre>
+        <code class="language-shell">
+mkdir my-go-project
+cd my-go-project
+go mod init my-go-project
+go get github.com/papaya147/parallelize
+        </code>
+      </pre>
+
+      <h1 class="section-heading">Challenges & Learnings</h1>
+      <h2 class="section-subheading">Challenges Faced</h2>
+      <p>
+        During the development of the parallelize package, one of the main challenges was achieving proper
+        generalization for methods and generics. Balancing flexibility with correctness required deep consideration of
+        Go's type system, particularly in designing abstractions that could effectively manage concurrency while
+        remaining easy to use and understand.
+      </p>
+
+      <h2 class="section-subheading">Lessons Learned</h2>
+      <ul>
+        <li>
+          <strong>Generalization with Generics</strong>: I learned the importance of properly designing and testing for
+          generalization in methods, ensuring the package could handle a wide range of use cases efficiently.
+        </li>
+        <li>
+          <strong>Concurrency Management</strong>: I gained a deeper understanding of Go’s concurrency model, focusing
+          on creating abstractions that simplify parallel execution while maintaining performance and safety.
+        </li>
+        <li>
+          <strong>API Design</strong>: I discovered the value of creating a user-friendly API, balancing simplicity with
+          powerful functionality to make parallel execution accessible to users of all levels.
+        </li>
+        <li>
+          <strong>Robust Error Handling</strong>: I emphasized the need for strong error handling to manage edge cases
+          and ensure reliable outcomes across various parallel tasks.
+        </li>
+      </ul>
+
+      <h1 class="section-heading">Future Improvements</h1>
+      <h2 class="section-subheading">Planned Enhancements</h2>
+      <ul>
+        <li>
+          <strong>Generic Method Signatures</strong>: Simplify the usage by implementing a generic signature for all
+          types of methods, reducing confusion and streamlining the process.
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 </body>
 </html>
