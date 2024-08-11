@@ -272,43 +272,33 @@ go get github.com/papaya147/pgtyconv
         </code>
       </pre>
 
-<!--      <h1 class="section-heading">Challenges & Learnings (TODO)</h1>-->
-<!--      <h2 class="section-subheading">Challenges Faced</h2>-->
-<!--      <p>-->
-<!--        During the development of the parallelize package, one of the main challenges was achieving proper-->
-<!--        generalization for methods and generics. Balancing flexibility with correctness required deep consideration of-->
-<!--        Go's type system, particularly in designing abstractions that could effectively manage concurrency while-->
-<!--        remaining easy to use and understand.-->
-<!--      </p>-->
+      <h1 class="section-heading">Challenges & Learnings</h1>
+      <h2 class="section-subheading">Lessons Learned</h2>
+      <ul>
+        <li>
+          <strong>Type Safety and Validation</strong>: I focused on implementing strict type safety and validation
+          mechanisms
+          to prevent errors during type conversion, enhancing the reliability of the package.
+        </li>
+        <li>
+          <strong>API Usability</strong>: I discovered the importance of designing an API that balances ease of use with
+          flexibility, making it intuitive for developers to integrate with various PostgreSQL data types.
+        </li>
+        <li>
+          <strong>Handling Null Values</strong>: I gained valuable experience in managing null values, ensuring that
+          the package accurately represented and converted nullable fields without introducing errors.
+        </li>
+      </ul>
 
-<!--      <h2 class="section-subheading">Lessons Learned</h2>-->
-<!--      <ul>-->
-<!--        <li>-->
-<!--          <strong>Generalization with Generics</strong>: I learned the importance of properly designing and testing for-->
-<!--          generalization in methods, ensuring the package could handle a wide range of use cases efficiently.-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <strong>Concurrency Management</strong>: I gained a deeper understanding of Go’s concurrency model, focusing-->
-<!--          on creating abstractions that simplify parallel execution while maintaining performance and safety.-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <strong>API Design</strong>: I discovered the value of creating a user-friendly API, balancing simplicity with-->
-<!--          powerful functionality to make parallel execution accessible to users of all levels.-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <strong>Robust Error Handling</strong>: I emphasized the need for strong error handling to manage edge cases-->
-<!--          and ensure reliable outcomes across various parallel tasks.-->
-<!--        </li>-->
-<!--      </ul>-->
-
-<!--      <h1 class="section-heading">Future Improvements</h1>-->
-<!--      <h2 class="section-subheading">Planned Enhancements</h2>-->
-<!--      <ul>-->
-<!--        <li>-->
-<!--          <strong>Generic Method Signatures</strong>: Simplify the usage by implementing a generic signature for all-->
-<!--          types of methods, reducing confusion and streamlining the process.-->
-<!--        </li>-->
-<!--      </ul>-->
+      <h1 class="section-heading">Future Improvements</h1>
+      <h2 class="section-subheading">Planned Enhancements</h2>
+      <ul>
+        <li>
+          <strong>Custom Enum and Null Value Handling</strong>: Enhance the package to better manage custom enum types
+          and their null values, providing more robust support for complex data models and ensuring accurate
+          representation of optional fields.
+        </li>
+      </ul>
     </div>
   </div>
 </div>
