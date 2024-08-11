@@ -25,164 +25,220 @@
     </div>
 
     <div class="project-content">
-      <h1 class="section-heading">Introduction</h1>
-      <h2 class="section-subheading">A Little About EMotorad</h2>
+      <h1 class="section-heading">Project Overview</h1>
+      <h2 class="section-subheading">Project Name</h2>
+      <p>Wynter's Dreams</p>
+
+      <h2 class="section-subheading">Duration</h2>
+      <p>August 2023 - March 2024</p>
+
+      <h2 class="section-subheading">Role</h2>
+      <p>Cloud and Backend Intern and Consultant</p>
+
+      <h2 class="section-subheading">Project Description</h2>
       <p>
-        EMotorad is an electric bicycle manufacturer and seller of electric bicycles.
-        EMotorad was in the process of establishing a new tech-based office in Bangalore
-        when I had joined. All bicycles being sold were electrically powered with assistance
-        and motors.
+        At Emotorad, I led the design and development of a scalable backend architecture for real-time electric bike
+        data ingestion, utilizing MQTT brokers and stateful Apache Flink applications for data aggregation and
+        processing with Cassandra, Redis, and Kafka as sinks. I developed and maintained Go REST microservices for
+        dashboards and the companion app, orchestrated deployment using AWS and Kubernetes, and managed a data lake on
+        AWS S3 with queries via Presto. Additionally, I deployed Firebase cloud functions for push notifications and
+        contributed to team growth by interviewing candidates for full-time and intern roles.
       </p>
 
-      <h2 class="section-subheading">The Problem</h2>
+      <h1 class="section-heading">Architecture & Design</h1>
+      <h2 class="section-subheading">Overview</h2>
+      <div class="image-container">
+        <img src="rendered/overview.svg" alt="Emotorad Architecture Overview" />
+      </div>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et velit placerat, vestibulum ex in, sagittis
-        sem. Phasellus vehicula felis ac orci facilisis vulputate. Donec lobortis, libero eu porttitor suscipit, nisl
-        mauris placerat urna, at tempor tortor libero quis mi. Pellentesque at lorem ligula. Donec tristique justo
-        dignissim, tempor lorem id, tempus dolor. Quisque efficitur neque ac magna porttitor feugiat. In bibendum in leo
-        eget blandit. In interdum tortor ac elit auctor ornare. Praesent a enim mollis, mattis sem id, rhoncus arcu.
-        Aenean vitae molestie ligula. Pellentesque id leo ex.
-
-        Vivamus non sem nulla. Nunc id tristique ex, et vehicula nisi. Praesent vulputate diam a feugiat commodo. In
-        posuere elementum neque vel vulputate. Nam id semper ante, sollicitudin varius lectus. Sed ornare consectetur
-        metus eget tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Proin quis magna magna. Sed sollicitudin pharetra magna, sit amet feugiat risus porta ac.
-
-        Aenean nec cursus ipsum. Cras fringilla ante eget finibus imperdiet. Vivamus luctus eros in hendrerit vestibulum.
-        Curabitur interdum metus eget fringilla eleifend. Proin ac finibus nisl. Integer porttitor diam orci, et rutrum
-        elit placerat a. Nullam vel metus gravida, ullamcorper nibh nec, fringilla augue. Ut ut nisi elit. Praesent
-        commodo dictum ante sed luctus. Mauris lacinia quam dui, cursus lacinia massa blandit eget. Pellentesque malesuada
-        finibus condimentum. Ut convallis in est sit amet maximus. Sed interdum elementum hendrerit. Proin nec justo a sem
-        aliquam egestas sit amet ac dui.
-
-        Proin euismod suscipit erat ut vulputate. Vivamus vel orci tristique, fringilla justo nec, congue neque. Nullam ac
-        imperdiet odio. Maecenas vehicula massa vitae mi ullamcorper, sed vehicula augue molestie. Nulla nec dui sit amet
-        odio congue iaculis. Nunc ut malesuada enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ipsum
-        risus, suscipit in erat vel, pretium tempor tellus.
-
-        Nunc justo neque, mattis et enim sed, ullamcorper commodo felis. Aliquam erat volutpat. Suspendisse dapibus ipsum
-        elit, sit amet eleifend orci tempus id. Aenean eros ante, pharetra et velit sit amet, condimentum pretium turpis.
-        Sed iaculis leo in elit commodo fermentum. Maecenas euismod vitae justo in ornare. Sed porta, justo non porttitor
-        fringilla, tellus erat bibendum nisi, sit amet pharetra lorem nisi a magna. Curabitur massa urna, facilisis id
-        dolor in, eleifend cursus sem.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et velit placerat, vestibulum ex in, sagittis
-        sem. Phasellus vehicula felis ac orci facilisis vulputate. Donec lobortis, libero eu porttitor suscipit, nisl
-        mauris placerat urna, at tempor tortor libero quis mi. Pellentesque at lorem ligula. Donec tristique justo
-        dignissim, tempor lorem id, tempus dolor. Quisque efficitur neque ac magna porttitor feugiat. In bibendum in leo
-        eget blandit. In interdum tortor ac elit auctor ornare. Praesent a enim mollis, mattis sem id, rhoncus arcu.
-        Aenean vitae molestie ligula. Pellentesque id leo ex.
-
-        Vivamus non sem nulla. Nunc id tristique ex, et vehicula nisi. Praesent vulputate diam a feugiat commodo. In
-        posuere elementum neque vel vulputate. Nam id semper ante, sollicitudin varius lectus. Sed ornare consectetur
-        metus eget tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Proin quis magna magna. Sed sollicitudin pharetra magna, sit amet feugiat risus porta ac.
-
-        Aenean nec cursus ipsum. Cras fringilla ante eget finibus imperdiet. Vivamus luctus eros in hendrerit vestibulum.
-        Curabitur interdum metus eget fringilla eleifend. Proin ac finibus nisl. Integer porttitor diam orci, et rutrum
-        elit placerat a. Nullam vel metus gravida, ullamcorper nibh nec, fringilla augue. Ut ut nisi elit. Praesent
-        commodo dictum ante sed luctus. Mauris lacinia quam dui, cursus lacinia massa blandit eget. Pellentesque malesuada
-        finibus condimentum. Ut convallis in est sit amet maximus. Sed interdum elementum hendrerit. Proin nec justo a sem
-        aliquam egestas sit amet ac dui.
-
-        Proin euismod suscipit erat ut vulputate. Vivamus vel orci tristique, fringilla justo nec, congue neque. Nullam ac
-        imperdiet odio. Maecenas vehicula massa vitae mi ullamcorper, sed vehicula augue molestie. Nulla nec dui sit amet
-        odio congue iaculis. Nunc ut malesuada enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ipsum
-        risus, suscipit in erat vel, pretium tempor tellus.
-
-        Nunc justo neque, mattis et enim sed, ullamcorper commodo felis. Aliquam erat volutpat. Suspendisse dapibus ipsum
-        elit, sit amet eleifend orci tempus id. Aenean eros ante, pharetra et velit sit amet, condimentum pretium turpis.
-        Sed iaculis leo in elit commodo fermentum. Maecenas euismod vitae justo in ornare. Sed porta, justo non porttitor
-        fringilla, tellus erat bibendum nisi, sit amet pharetra lorem nisi a magna. Curabitur massa urna, facilisis id
-        dolor in, eleifend cursus sem.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et velit placerat, vestibulum ex in, sagittis
-        sem. Phasellus vehicula felis ac orci facilisis vulputate. Donec lobortis, libero eu porttitor suscipit, nisl
-        mauris placerat urna, at tempor tortor libero quis mi. Pellentesque at lorem ligula. Donec tristique justo
-        dignissim, tempor lorem id, tempus dolor. Quisque efficitur neque ac magna porttitor feugiat. In bibendum in leo
-        eget blandit. In interdum tortor ac elit auctor ornare. Praesent a enim mollis, mattis sem id, rhoncus arcu.
-        Aenean vitae molestie ligula. Pellentesque id leo ex.
-
-        Vivamus non sem nulla. Nunc id tristique ex, et vehicula nisi. Praesent vulputate diam a feugiat commodo. In
-        posuere elementum neque vel vulputate. Nam id semper ante, sollicitudin varius lectus. Sed ornare consectetur
-        metus eget tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Proin quis magna magna. Sed sollicitudin pharetra magna, sit amet feugiat risus porta ac.
-
-        Aenean nec cursus ipsum. Cras fringilla ante eget finibus imperdiet. Vivamus luctus eros in hendrerit vestibulum.
-        Curabitur interdum metus eget fringilla eleifend. Proin ac finibus nisl. Integer porttitor diam orci, et rutrum
-        elit placerat a. Nullam vel metus gravida, ullamcorper nibh nec, fringilla augue. Ut ut nisi elit. Praesent
-        commodo dictum ante sed luctus. Mauris lacinia quam dui, cursus lacinia massa blandit eget. Pellentesque malesuada
-        finibus condimentum. Ut convallis in est sit amet maximus. Sed interdum elementum hendrerit. Proin nec justo a sem
-        aliquam egestas sit amet ac dui.
-
-        Proin euismod suscipit erat ut vulputate. Vivamus vel orci tristique, fringilla justo nec, congue neque. Nullam ac
-        imperdiet odio. Maecenas vehicula massa vitae mi ullamcorper, sed vehicula augue molestie. Nulla nec dui sit amet
-        odio congue iaculis. Nunc ut malesuada enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ipsum
-        risus, suscipit in erat vel, pretium tempor tellus.
-
-        Nunc justo neque, mattis et enim sed, ullamcorper commodo felis. Aliquam erat volutpat. Suspendisse dapibus ipsum
-        elit, sit amet eleifend orci tempus id. Aenean eros ante, pharetra et velit sit amet, condimentum pretium turpis.
-        Sed iaculis leo in elit commodo fermentum. Maecenas euismod vitae justo in ornare. Sed porta, justo non porttitor
-        fringilla, tellus erat bibendum nisi, sit amet pharetra lorem nisi a magna. Curabitur massa urna, facilisis id
-        dolor in, eleifend cursus sem.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et velit placerat, vestibulum ex in, sagittis
-        sem. Phasellus vehicula felis ac orci facilisis vulputate. Donec lobortis, libero eu porttitor suscipit, nisl
-        mauris placerat urna, at tempor tortor libero quis mi. Pellentesque at lorem ligula. Donec tristique justo
-        dignissim, tempor lorem id, tempus dolor. Quisque efficitur neque ac magna porttitor feugiat. In bibendum in leo
-        eget blandit. In interdum tortor ac elit auctor ornare. Praesent a enim mollis, mattis sem id, rhoncus arcu.
-        Aenean vitae molestie ligula. Pellentesque id leo ex.
-
-        Vivamus non sem nulla. Nunc id tristique ex, et vehicula nisi. Praesent vulputate diam a feugiat commodo. In
-        posuere elementum neque vel vulputate. Nam id semper ante, sollicitudin varius lectus. Sed ornare consectetur
-        metus eget tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Proin quis magna magna. Sed sollicitudin pharetra magna, sit amet feugiat risus porta ac.
-
-        Aenean nec cursus ipsum. Cras fringilla ante eget finibus imperdiet. Vivamus luctus eros in hendrerit vestibulum.
-        Curabitur interdum metus eget fringilla eleifend. Proin ac finibus nisl. Integer porttitor diam orci, et rutrum
-        elit placerat a. Nullam vel metus gravida, ullamcorper nibh nec, fringilla augue. Ut ut nisi elit. Praesent
-        commodo dictum ante sed luctus. Mauris lacinia quam dui, cursus lacinia massa blandit eget. Pellentesque malesuada
-        finibus condimentum. Ut convallis in est sit amet maximus. Sed interdum elementum hendrerit. Proin nec justo a sem
-        aliquam egestas sit amet ac dui.
-
-        Proin euismod suscipit erat ut vulputate. Vivamus vel orci tristique, fringilla justo nec, congue neque. Nullam ac
-        imperdiet odio. Maecenas vehicula massa vitae mi ullamcorper, sed vehicula augue molestie. Nulla nec dui sit amet
-        odio congue iaculis. Nunc ut malesuada enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ipsum
-        risus, suscipit in erat vel, pretium tempor tellus.
-
-        Nunc justo neque, mattis et enim sed, ullamcorper commodo felis. Aliquam erat volutpat. Suspendisse dapibus ipsum
-        elit, sit amet eleifend orci tempus id. Aenean eros ante, pharetra et velit sit amet, condimentum pretium turpis.
-        Sed iaculis leo in elit commodo fermentum. Maecenas euismod vitae justo in ornare. Sed porta, justo non porttitor
-        fringilla, tellus erat bibendum nisi, sit amet pharetra lorem nisi a magna. Curabitur massa urna, facilisis id
-        dolor in, eleifend cursus sem.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et velit placerat, vestibulum ex in, sagittis
-        sem. Phasellus vehicula felis ac orci facilisis vulputate. Donec lobortis, libero eu porttitor suscipit, nisl
-        mauris placerat urna, at tempor tortor libero quis mi. Pellentesque at lorem ligula. Donec tristique justo
-        dignissim, tempor lorem id, tempus dolor. Quisque efficitur neque ac magna porttitor feugiat. In bibendum in leo
-        eget blandit. In interdum tortor ac elit auctor ornare. Praesent a enim mollis, mattis sem id, rhoncus arcu.
-        Aenean vitae molestie ligula. Pellentesque id leo ex.
-
-        Vivamus non sem nulla. Nunc id tristique ex, et vehicula nisi. Praesent vulputate diam a feugiat commodo. In
-        posuere elementum neque vel vulputate. Nam id semper ante, sollicitudin varius lectus. Sed ornare consectetur
-        metus eget tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Proin quis magna magna. Sed sollicitudin pharetra magna, sit amet feugiat risus porta ac.
-
-        Aenean nec cursus ipsum. Cras fringilla ante eget finibus imperdiet. Vivamus luctus eros in hendrerit vestibulum.
-        Curabitur interdum metus eget fringilla eleifend. Proin ac finibus nisl. Integer porttitor diam orci, et rutrum
-        elit placerat a. Nullam vel metus gravida, ullamcorper nibh nec, fringilla augue. Ut ut nisi elit. Praesent
-        commodo dictum ante sed luctus. Mauris lacinia quam dui, cursus lacinia massa blandit eget. Pellentesque malesuada
-        finibus condimentum. Ut convallis in est sit amet maximus. Sed interdum elementum hendrerit. Proin nec justo a sem
-        aliquam egestas sit amet ac dui.
-
-        Proin euismod suscipit erat ut vulputate. Vivamus vel orci tristique, fringilla justo nec, congue neque. Nullam ac
-        imperdiet odio. Maecenas vehicula massa vitae mi ullamcorper, sed vehicula augue molestie. Nulla nec dui sit amet
-        odio congue iaculis. Nunc ut malesuada enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ipsum
-        risus, suscipit in erat vel, pretium tempor tellus.
-
-        Nunc justo neque, mattis et enim sed, ullamcorper commodo felis. Aliquam erat volutpat. Suspendisse dapibus ipsum
-        elit, sit amet eleifend orci tempus id. Aenean eros ante, pharetra et velit sit amet, condimentum pretium turpis.
-        Sed iaculis leo in elit commodo fermentum. Maecenas euismod vitae justo in ornare. Sed porta, justo non porttitor
-        fringilla, tellus erat bibendum nisi, sit amet pharetra lorem nisi a magna. Curabitur massa urna, facilisis id
-        dolor in, eleifend cursus sem.
-
-
+        The backend architecture for Emotorad was designed with a strong focus on scalability and real-time data
+        processing to handle the ingestion of electric bike data. PostgreSQL was employed to manage stateful services
+        across various microservices, ensuring reliable and consistent data handling.
       </p>
+      <p>
+        To enhance security and access control, the system used PASETO tokens with asymmetric keys for authenticating
+        multiple services. This approach ensured secure communication and robust authentication across the platform.
+      </p>
+      <p>
+        Real-time data processing was a key aspect of the architecture, with stateful Apache Flink applications
+        developed to perform map, reduce, and filter operations. These applications worked in tandem with Cassandra,
+        Redis, and Kafka as data sinks, allowing for efficient data aggregation and processing.
+      </p>
+      <p>
+        The architecture also included Go-based REST microservices, which served as the backbone for both the Emotorad
+        dashboards and the companion app. These microservices provided a seamless and responsive user experience,
+        facilitating real-time interaction with the system.
+      </p>
+      <p>
+        Deployment was managed using Amazon Web Services (AWS) and Kubernetes, allowing for scalable and resilient
+        infrastructure. This setup ensured that the system could handle varying loads and maintain high availability.
+      </p>
+      <p>
+        To support data storage and analysis, a data lake was maintained on AWS S3, with Presto used for executing
+        queries. This enabled efficient data retrieval and analysis, supporting the platform's real-time processing
+        needs.
+      </p>
+      <p>
+        Firebase cloud functions were deployed to manage push notifications, ensuring timely and reliable
+        communication with users across the platform.
+      </p>
+
+      <h2 class="section-subheading">Scalability & Performance</h2>
+      <p>
+        Emotorad's backend architecture is designed for high performance and scalability. Built in Go, the system
+        leverages Go's strong concurrency features to efficiently manage multiple requests through lightweight
+        goroutines, ensuring fast and reliable processing of real-time electric bike data.
+      </p>
+      <div class="image-container">
+        <img src="rendered/scalability.svg" alt="Emotorad Architecture Scalability" />
+      </div>
+      <p>
+        For scalability, the system uses Docker containers orchestrated by Kubernetes on Amazon EKS. The Horizontal Pod
+        Autoscaler (HPA) dynamically adjusts the number of running pods based on traffic and workload, ensuring the
+        system scales seamlessly with demand. The load balancer with TLS termination distributes incoming requests
+        across these pods, enhancing fault tolerance and optimizing resource utilization.
+      </p>
+      <p>
+        Stateful Apache Flink jobs, for real-time data processing, are managed and scaled using the Flink
+        Kubernetes Operator. This ensures that the data aggregation and processing pipelines adapt dynamically to
+        varying loads, maintaining efficient and consistent performance.
+      </p>
+
+      <h2 class="section-subheading">Security</h2>
+      <div class="image-container">
+        <img src="rendered/security.svg" alt="Emotorad Architecture Security" />
+      </div>
+      <p>
+        The security of Emotorad's platform is a top priority, with multiple layers of protection in place to safeguard
+        data and communications. All data stored in PostgreSQL, Cassandra, Redis, and Amazon S3 is encrypted at rest,
+        ensuring that sensitive information remains secure from unauthorized access.
+      </p>
+      <p>
+        The platform employs two load balancers: one dedicated to EMQX for MQTT protocol encryption, securing the
+        communication between IoT devices and the backend, and another for REST API encryption, ensuring secure data
+        transmission between microservices. Both load balancers use TLS to encrypt data in transit, protecting it from
+        potential interception during transmission.
+      </p>
+      <p>
+        Additionally, all communication between backend services occurs within a private cloud environment on AWS,
+        further isolating and securing internal data exchanges. This multi-layered security approach ensures robust
+        protection for both data at rest and in transit across the entire platform.
+      </p>
+
+
+      <h2 class="section-subheading">Deployment & Monitoring</h2>
+      <div class="image-container">
+        <img src="rendered/monitoring.svg" alt="Emotorad Architecture Monitoring" />
+      </div>
+      <p>
+        Deployment for Emotorad's platform is managed using AWS Elastic Kubernetes Service (EKS), which facilitates
+        automated scaling and orchestration of containerized microservices. EKS handles the deployment of application
+        containers, scaling them up or down based on real-time traffic demands, ensuring smooth and efficient management
+        of services.
+      </p>
+      <p>
+        For logging and monitoring, MongoDB and Kafka are employed to track and analyze logs generated by the
+        application. MongoDB stores the logs, while Kafka handles the streaming of log data. A WebSocket client connects
+        to MongoDB, displaying real-time logs in a dashboard, providing detailed insights into system performance and
+        operational health. This setup ensures that the platform remains robust, with continuous monitoring and logging
+        to support effective management and troubleshooting.
+      </p>
+
+
+      <!--      <h1 class="section-heading">Implementation Details</h1>-->
+      <!--      <h2 class="section-subheading">Challenges Faced</h2>-->
+      <!--      <p>-->
+      <!--        One significant challenge was devising an efficient method to index and manage book images, given that there-->
+      <!--        isn’t a straightforward, direct flow between the images and their associated books. Initially, linking images to-->
+      <!--        books and ensuring they were retrieved and displayed correctly posed difficulties due to the complex-->
+      <!--        relationships and lack of a unified schema. To address this, I designed a custom indexing system where metadata-->
+      <!--        about each image was stored alongside book data in PostgreSQL. This system included a unique identifier for each-->
+      <!--        image, which was then used to establish a clear association between the images and their respective books.-->
+      <!--        I also implemented a structured naming convention and organised the images in S3 with directory-like-->
+      <!--        structures to facilitate efficient retrieval and management.-->
+      <!--      </p>-->
+      <!--      <p>Go model I ended up with:</p>-->
+      <!--      <pre>-->
+      <!--        <code class="language-go">-->
+      <!--type BookPaging struct {-->
+      <!--	BookId string   `json:"book_id"`-->
+      <!--	Paging []Paging `json:"paging"`-->
+      <!--}-->
+
+      <!--type Paging struct {-->
+      <!--	Chapter    string   `json:"chapter"`-->
+      <!--	Heading    string   `json:"heading"`-->
+      <!--	Text       string   `json:"text"`-->
+      <!--	Buttons    []Button `json:"buttons"`-->
+      <!--	EndChapter bool     `json:"end_chapter"`-->
+      <!--	Image      string   `json:"image"`-->
+      <!--}-->
+
+      <!--type Button struct {-->
+      <!--	Text             string `json:"text"`-->
+      <!--	NextChapter      string `json:"next_chapter"`-->
+      <!--	NextChapterIndex int    `json:"next_chapter_index"`-->
+      <!--}-->
+      <!--        </code>-->
+      <!--      </pre>-->
+      <!--      <p>-->
+      <!--        Integrating CCAvenue for payment processing in Go proved challenging due to the lack of direct support and-->
+      <!--        documentation for Go. The primary difficulty was implementing the required encryption and decryption protocols-->
+      <!--        for secure communication with CCAvenue’s API. To overcome this, I wrote custom code to handle the specific-->
+      <!--        encryption methods mandated by CCAvenue. This involved creating encryption routines to securely transmit payment-->
+      <!--        information and implementing decryption logic to process responses from CCAvenue.-->
+      <!--      </p>-->
+
+      <!--      <h2 class="section-subheading">Key Features</h2>-->
+      <!--      <ul>-->
+      <!--        <li>-->
+      <!--          <strong>Interactive Storytelling:</strong> Dynamic story paths, allowing unique user choices.-->
+      <!--        </li>-->
+      <!--        <li>-->
+      <!--          <strong>User Management:</strong> Backend system for user registration, authentication, and roles.-->
+      <!--        </li>-->
+      <!--        <li>-->
+      <!--          <strong>Admin Dashboard:</strong> Easy content upload and management for administrators.-->
+      <!--        </li>-->
+      <!--        <li>-->
+      <!--          <strong>Secure Content Delivery:</strong> TLS encryption and encrypted storage on Amazon S3.-->
+      <!--        </li>-->
+      <!--        <li>-->
+      <!--          <strong>JSON-Based Navigation:</strong> Seamless story navigation with JSON object format.-->
+      <!--        </li>-->
+      <!--        <li>-->
+      <!--          <strong>Image Management:</strong> Custom system for efficient image retrieval from S3.-->
+      <!--        </li>-->
+      <!--        <li>-->
+      <!--          <strong>Payment Integration:</strong> Secure CCAvenue payment processing with custom encryption.-->
+      <!--        </li>-->
+      <!--      </ul>-->
+
+      <!--      <h1 class="section-heading">Testing & Deployment</h1>-->
+      <!--      <h2 class="section-subheading">Testing Strategies</h2>-->
+      <!--      <p>-->
+      <!--        For testing APIs, I implemented mocking through dependency injection, which allowed for isolating the APIs from-->
+      <!--        external services. By injecting mocked dependencies during testing, I could simulate various scenarios, ensuring-->
+      <!--        that the APIs were thoroughly tested without relying on external systems. This approach provided a controlled-->
+      <!--        testing environment, resulting in more reliable and efficient tests.-->
+      <!--      </p>-->
+      <!--      <p>-->
+      <!--        I developed tests for database queries using sqlc in Go. These tests were designed to validate the-->
+      <!--        correctness of SQL queries generated by sqlc, ensuring accurate data retrieval and manipulation. By focusing on-->
+      <!--        the integrity of the database interactions.-->
+      <!--      </p>-->
+
+      <!--      <h2 class="section-subheading">Deployment Automation</h2>-->
+      <!--      <div class="image-container">-->
+      <!--        <img src="rendered/deployment.svg" alt="Wynter's Dreams Deployment Automation">-->
+      <!--      </div>-->
+      <!--      <p>-->
+      <!--        In the initial stages of deployment automation for Wynter's Dreams, I used a Makefile to streamline the process.-->
+      <!--        The Makefile ran commands that built the backend Docker image, pushed it to AWS Elastic Container Registry-->
+      <!--        (ECR), and then updated the deployment on AWS Elastic Container Service (ECS). However, to automate this process-->
+      <!--        further, I transitioned to using GitHub Actions. This switch allowed for a more seamless, automated deployment-->
+      <!--        pipeline directly tied to the repository, improving efficiency and removing manual intervention.-->
+      <!--      </p>-->
     </div>
 
     <div class="right-sidebar">
@@ -207,10 +263,13 @@
       <a href="https://firebase.google.com/docs/functions" target="_blank">Firebase Cloud Functions</a>
       <a href="https://firebase.google.com/docs/firestore" target="_blank">Cloud Firestore</a>
 
-      <h2 class="section-heading">Streaming Services</h2>
+      <h2 class="section-heading">Streaming Services & Formats</h2>
       <a href="https://kafka.apache.org/" target="_blank">Apache Kafka</a>
       <a href="https://flink.apache.org/" target="_blank">Apache Flink</a>
       <a href="https://www.emqx.com/en" target="_blank">EMQX MQTT</a>
+      <a href="https://parquet.apache.org/" target="_blank">Apache Parquet</a>
+      <a href="https://protobuf.dev/" target="_blank">Protocol Buffers</a>
+      <a href="https://www.json.org/json-en.html" target="_blank">JSON</a>
 
       <h2 class="section-heading">Analytics</h2>
       <a href="https://trino.io/" target="_blank">Trino</a>
