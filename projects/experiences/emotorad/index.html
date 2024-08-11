@@ -26,8 +26,8 @@
 
     <div class="project-content">
       <h1 class="section-heading">Project Overview</h1>
-      <h2 class="section-subheading">Project Name</h2>
-      <p>Wynter's Dreams</p>
+      <h2 class="section-subheading">Company Name</h2>
+      <p>Emotorad</p>
 
       <h2 class="section-subheading">Duration</h2>
       <p>August 2023 - March 2024</p>
@@ -145,100 +145,93 @@
       </p>
 
 
-      <!--      <h1 class="section-heading">Implementation Details</h1>-->
-      <!--      <h2 class="section-subheading">Challenges Faced</h2>-->
-      <!--      <p>-->
-      <!--        One significant challenge was devising an efficient method to index and manage book images, given that there-->
-      <!--        isn’t a straightforward, direct flow between the images and their associated books. Initially, linking images to-->
-      <!--        books and ensuring they were retrieved and displayed correctly posed difficulties due to the complex-->
-      <!--        relationships and lack of a unified schema. To address this, I designed a custom indexing system where metadata-->
-      <!--        about each image was stored alongside book data in PostgreSQL. This system included a unique identifier for each-->
-      <!--        image, which was then used to establish a clear association between the images and their respective books.-->
-      <!--        I also implemented a structured naming convention and organised the images in S3 with directory-like-->
-      <!--        structures to facilitate efficient retrieval and management.-->
-      <!--      </p>-->
-      <!--      <p>Go model I ended up with:</p>-->
-      <!--      <pre>-->
-      <!--        <code class="language-go">-->
-      <!--type BookPaging struct {-->
-      <!--	BookId string   `json:"book_id"`-->
-      <!--	Paging []Paging `json:"paging"`-->
-      <!--}-->
+      <h1 class="section-heading">Implementation Details</h1>
+      <h2 class="section-subheading">Challenges Faced</h2>
+      <p>
+        A significant challenge was ensuring efficient communication between mobile devices and the backend,
+        specifically for sending data in a format that maintained consistency and integrity. To address this, I adopted
+        Protocol Buffers (protobuf) for data serialisation. Protobuf offers a compact binary format and schema
+        definition that ensured robust and efficient data exchange. Designing the appropriate protobuf schema required
+        careful consideration of data types and structures to align with the needs of both the mobile app and the
+        backend systems.
+      </p>
+      <p>
+        Maintaining stateful services on Kubernetes presented another challenge, particularly in ensuring data
+        consistency and high availability. Implementing StatefulSets with headless services and configuring persistent
+        volume claims helped manage the state across pod restarts and scaling events. This setup required meticulous
+        planning to handle stateful data effectively while ensuring that services remained resilient and performant
+        under varying loads.
+      </p>
+      <p>
+        Ensuring proper checkpointing and recovery in Apache Flink applications was crucial for handling potential
+        crashes and maintaining data integrity. I implemented checkpointing mechanisms that periodically save the state
+        of the Flink jobs, allowing for recovery and continuation from the last successful checkpoint in the event of a
+        failure. This involved configuring the Flink Kubernetes operator to manage scaling and checkpointing, ensuring
+        that the applications could recover gracefully and continue processing without significant data loss or
+        downtime.
+      </p>
 
-      <!--type Paging struct {-->
-      <!--	Chapter    string   `json:"chapter"`-->
-      <!--	Heading    string   `json:"heading"`-->
-      <!--	Text       string   `json:"text"`-->
-      <!--	Buttons    []Button `json:"buttons"`-->
-      <!--	EndChapter bool     `json:"end_chapter"`-->
-      <!--	Image      string   `json:"image"`-->
-      <!--}-->
+      <h2 class="section-subheading">Key Features</h2>
+      <ul>
+        <li>
+          <strong>Efficient Data Serialization:</strong> Used Protocol Buffers (protobuf) for compact, efficient data
+          exchange between mobile devices and the backend.
+        </li>
+        <li>
+          <strong>Stateful Service Management:</strong> Leveraged Kubernetes StatefulSets and persistent volumes for
+          data consistency and high availability.
+        </li>
+        <li>
+          <strong>Advanced Checkpointing:</strong> Configured Flink checkpointing to ensure data recovery and integrity
+          during failures.
+        </li>
+        <li>
+          <strong>Real-Time Data Processing:</strong> Developed stateful Flink applications for real-time data
+          processing with Cassandra, Redis, and Kafka.
+        </li>
+        <li>
+          <strong>Microservice Architecture:</strong> Built and maintained Go REST microservices for dashboards and the
+          Emotorad companion app.
+        </li>
+        <li>
+          <strong>Dynamic Deployment and Scaling:</strong> Used AWS EKS and Kubernetes with HPA and Flink Kubernetes
+          operator for scalable deployments.
+        </li>
+        <li>
+          <strong>Logging and Monitoring:</strong> Implemented logging with MongoDB and Kafka, and real-time log display
+          with a WebSocket client.
+        </li>
+        <li>
+          <strong>Secure Encryption:</strong> Applied TLS encryption for MQTT and REST APIs, and encryption at rest for
+          stateful services.
+        </li>
+      </ul>
 
-      <!--type Button struct {-->
-      <!--	Text             string `json:"text"`-->
-      <!--	NextChapter      string `json:"next_chapter"`-->
-      <!--	NextChapterIndex int    `json:"next_chapter_index"`-->
-      <!--}-->
-      <!--        </code>-->
-      <!--      </pre>-->
-      <!--      <p>-->
-      <!--        Integrating CCAvenue for payment processing in Go proved challenging due to the lack of direct support and-->
-      <!--        documentation for Go. The primary difficulty was implementing the required encryption and decryption protocols-->
-      <!--        for secure communication with CCAvenue’s API. To overcome this, I wrote custom code to handle the specific-->
-      <!--        encryption methods mandated by CCAvenue. This involved creating encryption routines to securely transmit payment-->
-      <!--        information and implementing decryption logic to process responses from CCAvenue.-->
-      <!--      </p>-->
+      <h1 class="section-heading">Testing & Deployment</h1>
+      <h2 class="section-subheading">Testing Strategies</h2>
+      <p>
+        For testing APIs, I implemented mocking through dependency injection, which allowed for isolating the APIs from
+        external services. By injecting mocked dependencies during testing, I could simulate various scenarios, ensuring
+        that the APIs were thoroughly tested without relying on external systems. This approach provided a controlled
+        testing environment, resulting in more reliable and efficient tests.
+      </p>
+      <p>
+        I developed tests for database queries using sqlc in Go. These tests were designed to validate the
+        correctness of SQL queries generated by sqlc, ensuring accurate data retrieval and manipulation. By focusing on
+        the integrity of the database interactions.
+      </p>
 
-      <!--      <h2 class="section-subheading">Key Features</h2>-->
-      <!--      <ul>-->
-      <!--        <li>-->
-      <!--          <strong>Interactive Storytelling:</strong> Dynamic story paths, allowing unique user choices.-->
-      <!--        </li>-->
-      <!--        <li>-->
-      <!--          <strong>User Management:</strong> Backend system for user registration, authentication, and roles.-->
-      <!--        </li>-->
-      <!--        <li>-->
-      <!--          <strong>Admin Dashboard:</strong> Easy content upload and management for administrators.-->
-      <!--        </li>-->
-      <!--        <li>-->
-      <!--          <strong>Secure Content Delivery:</strong> TLS encryption and encrypted storage on Amazon S3.-->
-      <!--        </li>-->
-      <!--        <li>-->
-      <!--          <strong>JSON-Based Navigation:</strong> Seamless story navigation with JSON object format.-->
-      <!--        </li>-->
-      <!--        <li>-->
-      <!--          <strong>Image Management:</strong> Custom system for efficient image retrieval from S3.-->
-      <!--        </li>-->
-      <!--        <li>-->
-      <!--          <strong>Payment Integration:</strong> Secure CCAvenue payment processing with custom encryption.-->
-      <!--        </li>-->
-      <!--      </ul>-->
-
-      <!--      <h1 class="section-heading">Testing & Deployment</h1>-->
-      <!--      <h2 class="section-subheading">Testing Strategies</h2>-->
-      <!--      <p>-->
-      <!--        For testing APIs, I implemented mocking through dependency injection, which allowed for isolating the APIs from-->
-      <!--        external services. By injecting mocked dependencies during testing, I could simulate various scenarios, ensuring-->
-      <!--        that the APIs were thoroughly tested without relying on external systems. This approach provided a controlled-->
-      <!--        testing environment, resulting in more reliable and efficient tests.-->
-      <!--      </p>-->
-      <!--      <p>-->
-      <!--        I developed tests for database queries using sqlc in Go. These tests were designed to validate the-->
-      <!--        correctness of SQL queries generated by sqlc, ensuring accurate data retrieval and manipulation. By focusing on-->
-      <!--        the integrity of the database interactions.-->
-      <!--      </p>-->
-
-      <!--      <h2 class="section-subheading">Deployment Automation</h2>-->
-      <!--      <div class="image-container">-->
-      <!--        <img src="rendered/deployment.svg" alt="Wynter's Dreams Deployment Automation">-->
-      <!--      </div>-->
-      <!--      <p>-->
-      <!--        In the initial stages of deployment automation for Wynter's Dreams, I used a Makefile to streamline the process.-->
-      <!--        The Makefile ran commands that built the backend Docker image, pushed it to AWS Elastic Container Registry-->
-      <!--        (ECR), and then updated the deployment on AWS Elastic Container Service (ECS). However, to automate this process-->
-      <!--        further, I transitioned to using GitHub Actions. This switch allowed for a more seamless, automated deployment-->
-      <!--        pipeline directly tied to the repository, improving efficiency and removing manual intervention.-->
-      <!--      </p>-->
+      <h2 class="section-subheading">Deployment Automation</h2>
+      <div class="image-container">
+        <img src="rendered/deployment.svg" alt="Emotorad Deployment Automation">
+      </div>
+      <p>
+        Initially, I used a Makefile to automate the deployment process for Emotorad. The Makefile pushed Docker images
+        to AWS Elastic Container Registry (ECR) and then employed kubectl commands to pull the latest image and restart
+        the deployment on Kubernetes. To improve efficiency and streamline automation, I transitioned to GitHub Actions,
+        which integrates deployment tasks directly with the repository. Future plans include adopting Jenkins to further
+        enhance and automate the deployment pipeline.
+      </p>
     </div>
 
     <div class="right-sidebar">
