@@ -45,85 +45,157 @@
       <h1 class="section-heading">Design & Implementation</h1>
       <h2 class="section-subheading">Overview</h2>
       <p>
-        The parallelize package provides a simplified interface for running multiple functions concurrently in Go,
-        eliminating the need for developers to manually manage synchronization using sync.WaitGroup or channels. By
-        abstracting these complexities, parallelize allows users to easily group tasks and execute them in parallel with
-        minimal boilerplate code.
+        The pgtypeconv package provides a set of utility functions for converting between PostgreSQL types and Go types,
+        simplifying the process of handling data interchange between your Go application and a PostgreSQL database. This
+        package supports conversion for various data types, including integers, floating-point numbers, strings, UUIDs,
+        and timestamps.
       </p>
 
       <h2 class="section-subheading">Core Features</h2>
       <ul>
         <li>
-          <strong>Parallel Execution</strong>:
-          Easily execute multiple functions concurrently without manually handling goroutines and synchronization.
+          <strong>Type Conversion Functions</strong>:
+          Convert between Go types and PostgreSQL types (pgtype), including float32, float64, int64, string,
+          uuid, Date, and Timestamptz.
         </li>
         <li>
-          <strong>Group-Based Management</strong>:
-          Organize and manage tasks in a Group, enabling batch execution of related functions.
+          <strong>Support for Pointers</strong>:
+          Handle conversions from and to pointer types, accommodating nullable fields.
         </li>
         <li>
-          <strong>Flexible Task Addition</strong>:
-          Add tasks with or without input arguments and output results, providing versatility for various use cases.
+          <strong>Versatile Data Handling</strong>:
+          Convert various data formats, such as int64 to pgtype.Int8, string to pgtype.Text, and uuid.UUID to
+          pgtype.UUID.
         </li>
         <li>
-          <strong>Automatic Synchronization</strong>:
-          Automatically manages synchronization using sync.WaitGroup, ensuring all tasks complete before returning.
+          <strong>Time Conversion</strong>:
+          Facilitate conversion between Unix timestamps and PostgreSQL date/time types (pgtype.Date,
+          pgtype.Timestamptz), supporting different time units.
         </li>
         <li>
-          <strong>Context Support</strong>:
-          Integrate context.Context into task execution, allowing for cancellation and timeout control.
-        </li>
-        <li>
-          <strong>Abstraction of Concurrency</strong>:
-          Abstracts away the complexity of concurrency in Go, simplifying the development of parallelized code.
+          <strong>Bidirectional Conversion</strong>:
+          Support both conversion to and from PostgreSQL types, ensuring seamless data manipulation between Go and
+          PostgreSQL.
         </li>
       </ul>
 
       <h2 class="section-subheading">Key Components</h2>
       <pre>
-  <code class="language-go">
-package parallelize
+        <code class="language-go">
+package pgtyconv
 
-// NewGroup creates a new group for parallel execution.
-func NewGroup() *Group {
+// FromFloat32 converts a float32 to pgtype.Float4.
+func FromFloat32(f float32) pgtype.Float4 {
 }
 
-// Execute runs all tasks in the group concurrently.
-func (g *Group) Execute() {
+// FromFloat32Ptr converts a *float32 to pgtype.Float4.
+func FromFloat32Ptr(f *float32) pgtype.Float4 {
 }
 
-// AddWithOutputWithArgs adds a task with output and arguments to the group.
-func AddWithOutputWithArgs[I, O any](group *Group, f WithOutputWithArgsSignature[I, O], ctx context.Context, input I) WithOutputWithArgsChannels[O] {
+// FromFloat64 converts a float64 to pgtype.Float8.
+func FromFloat64(f float64) pgtype.Float8 {
 }
 
-// AddWithOutputWithoutArgs adds a task with output and no arguments to the group.
-func AddWithOutputWithoutArgs[O any](group *Group, f WithOutputWithoutArgsSignature[O], ctx context.Context) WithOutputWithoutArgsChannels[O] {
+// FromFloat64Ptr converts a *float64 to pgtype.Float8.
+func FromFloat64Ptr(f *float64) pgtype.Float8 {
 }
 
-// AddWithoutOutputWithArgs adds a task without output but with arguments to the group.
-func AddWithoutOutputWithArgs[I any](group *Group, f WithoutOutputWithArgsSignature[I], ctx context.Context, input I) WithoutOutputWithArgsChannels {
+// FromInt64 converts an int64 to pgtype.Int8.
+func FromInt64(i int64) pgtype.Int8 {
 }
 
-// AddWithoutOutputWithoutArgs adds a task without output and no arguments to the group.
-func AddWithoutOutputWithoutArgs(group *Group, f WithoutOutputWithoutArgsSignature, ctx context.Context) WithoutOutputWithoutArgsChannels {
+// FromInt64Ptr converts a *int64 to pgtype.Int8.
+func FromInt64Ptr(i *int64) pgtype.Int8 {
 }
 
-// Read retrieves the output of a task from its channels.
-func (c WithOutputWithArgsChannels[O]) Read() (O, error) {
+// FromString converts a string to pgtype.Text.
+func FromString(s string) pgtype.Text {
 }
 
-// Read retrieves the output of a task from its channels.
-func (c WithOutputWithoutArgsChannels[O]) Read() (O, error) {
+// FromStringPtr converts a *string to pgtype.Text.
+func FromStringPtr(s *string) pgtype.Text {
 }
 
-// Read checks for completion of a task without output.
-func (c WithoutOutputWithArgsChannels) Read() error {
+// FromUUID converts a uuid.UUID to pgtype.UUID.
+func FromUUID(u uuid.UUID) pgtype.UUID {
 }
 
-// Read checks for completion of a task without output.
-func (c WithoutOutputWithoutArgsChannels) Read() error {
+// FromUUIDPtr converts a *uuid.UUID to pgtype.UUID.
+func FromUUIDPtr(u *uuid.UUID) pgtype.UUID {
 }
-  </code>
+
+// FromUnixDate converts an int64 to pgtype.Date.
+func FromUnixDate(i int64, u TimeUnit) pgtype.Date {
+}
+
+// FromUnixDatePtr converts a *int64 to pgtype.Date.
+func FromUnixDatePtr(i *int64, u TimeUnit) pgtype.Date {
+}
+
+// FromUnixTime converts an int64 to pgtype.Timestamptz.
+func FromUnixTime(i int64, u TimeUnit) pgtype.Timestamptz {
+}
+
+// FromUnixTimePtr converts a *int64 to pgtype.Timestamptz.
+func FromUnixTimePtr(i *int64, u TimeUnit) pgtype.Timestamptz {
+}
+
+// ToFloat32 converts pgtype.Float4 to float32.
+func ToFloat32(t pgtype.Float4) float32 {
+}
+
+// ToFloat32Ptr converts pgtype.Float4 to *float32.
+func ToFloat32Ptr(t pgtype.Float4) *float32 {
+}
+
+// ToFloat64 converts pgtype.Float8 to float64.
+func ToFloat64(t pgtype.Float8) float64 {
+}
+
+// ToFloat64Ptr converts pgtype.Float8 to *float64.
+func ToFloat64Ptr(t pgtype.Float8) *float64 {
+}
+
+// ToInt64 converts pgtype.Int8 to int64.
+func ToInt64(t pgtype.Int8) int64 {
+}
+
+// ToInt64Ptr converts pgtype.Int8 to *int64.
+func ToInt64Ptr(t pgtype.Int8) *int64 {
+}
+
+// ToString converts pgtype.Text to string.
+func ToString(t pgtype.Text) string {
+}
+
+// ToStringPtr converts pgtype.Text to *string.
+func ToStringPtr(t pgtype.Text) *string {
+}
+
+// ToUUID converts pgtype.UUID to uuid.UUID.
+func ToUUID(u pgtype.UUID) uuid.UUID {
+}
+
+// ToUUIDPtr converts pgtype.UUID to *uuid.UUID.
+func ToUUIDPtr(u pgtype.UUID) *uuid.UUID {
+}
+
+// ToUnixDate converts pgtype.Date to int64.
+func ToUnixDate(d pgtype.Date, u TimeUnit) int64 {
+}
+
+// ToUnixDatePtr converts pgtype.Date to *int64.
+func ToUnixDatePtr(d pgtype.Date, u TimeUnit) *int64 {
+}
+
+// ToUnixTime converts pgtype.Timestamptz to int64.
+func ToUnixTime(d pgtype.Timestamptz, u TimeUnit) int64 {
+}
+
+// ToUnixTimePtr converts pgtype.Timestamptz to *int64.
+func ToUnixTimePtr(d pgtype.Timestamptz, u TimeUnit) *int64 {
+}
+</code>
 </pre>
 
       <h2 class="section-subheading">Usage Examples</h2>
@@ -132,51 +204,59 @@ func (c WithoutOutputWithoutArgsChannels) Read() error {
 package main
 
 import (
-	"context"
-	"fmt"
-
-	"github.com/papaya147/parallelize"
+    "fmt"
+    "github.com/jackc/pgx/pgtype"
+    "github.com/papaya147/pgtyconv"
+    "github.com/google/uuid"
+    "time"
 )
 
-func add(_ context.Context, args []int) (int, error) {
-	var sum int = 0
-	for _, v := range args {
-		sum += v
-	}
-	return sum, nil
+type User struct {
+    UserId     int64
+    FirstName  *string
+    MiddleName *string
+    LastName   *string
+    Birthday   *int64
+    Email      string
+    ImageUrl   string
 }
 
-func multiply(_ context.Context, args []int) (int, error) {
-	var product int = 1
-	for _, v := range args {
-		product *= v
-	}
-	return product, nil
+type AppUser struct {
+    AppUserID  int64
+    FirstName  pgtype.Text
+    MiddleName pgtype.Text
+    LastName   pgtype.Text
+    Birthday   pgtype.Timestamptz
+    Email      string
+    ImageUrl   string
+}
+
+func convUser(u AppUser) *User {
+    return &User{
+        UserId:     u.AppUserID,
+        FirstName:  pgtyconv.ToStringPtr(u.FirstName),
+        MiddleName: pgtyconv.ToStringPtr(u.MiddleName),
+        LastName:   pgtyconv.ToStringPtr(u.LastName),
+        Birthday:   pgtyconv.ToUnixTimePtr(u.Birthday, pgtyconv.TimeUnitSeconds),
+        Email:      u.Email,
+        ImageUrl:   u.ImageUrl,
+    }
 }
 
 func main() {
-	g := parallelize.NewGroup()
+    appUser := AppUser{
+        AppUserID:  12345,
+        FirstName:  pgtype.Text{String: "John", Valid: true},
+        MiddleName: pgtype.Text{String: "D", Valid: true},
+        LastName:   pgtype.Text{String: "Doe", Valid: true},
+        Birthday:   pgtype.Timestamptz{Time: time.Now(), Valid: true},
+        Email:      "john.doe@example.com",
+        ImageUrl:   "http://example.com/image.jpg",
+    }
 
-	// add methods to the group
-	res1 := parallelize.AddWithOutputWithArgs(g, add, context.Background(), []int{1, 2, 3, 4})
-	res2 := parallelize.AddWithOutputWithArgs(g, multiply, context.Background(), []int{1, 2, 3, 4})
+    user := convUser(appUser)
 
-	// execute the group using go routines
-	g.Execute()
-
-	// extract outputs and use them!
-	sum, err := res1.Read()
-	if err != nil {
-		panic(err)
-	}
-
-	prod, err := res2.Read()
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("Sum is %d\n", sum)      // Sum is 10
-	fmt.Printf("Product is %d\n", prod) // Product is 24
+    fmt.Printf("Converted User: %+v\n", user)
 }
         </code>
       </pre>
@@ -188,47 +268,47 @@ func main() {
 mkdir my-go-project
 cd my-go-project
 go mod init my-go-project
-go get github.com/papaya147/parallelize
+go get github.com/papaya147/pgtyconv
         </code>
       </pre>
 
-      <h1 class="section-heading">Challenges & Learnings</h1>
-      <h2 class="section-subheading">Challenges Faced</h2>
-      <p>
-        During the development of the parallelize package, one of the main challenges was achieving proper
-        generalization for methods and generics. Balancing flexibility with correctness required deep consideration of
-        Go's type system, particularly in designing abstractions that could effectively manage concurrency while
-        remaining easy to use and understand.
-      </p>
+<!--      <h1 class="section-heading">Challenges & Learnings (TODO)</h1>-->
+<!--      <h2 class="section-subheading">Challenges Faced</h2>-->
+<!--      <p>-->
+<!--        During the development of the parallelize package, one of the main challenges was achieving proper-->
+<!--        generalization for methods and generics. Balancing flexibility with correctness required deep consideration of-->
+<!--        Go's type system, particularly in designing abstractions that could effectively manage concurrency while-->
+<!--        remaining easy to use and understand.-->
+<!--      </p>-->
 
-      <h2 class="section-subheading">Lessons Learned</h2>
-      <ul>
-        <li>
-          <strong>Generalization with Generics</strong>: I learned the importance of properly designing and testing for
-          generalization in methods, ensuring the package could handle a wide range of use cases efficiently.
-        </li>
-        <li>
-          <strong>Concurrency Management</strong>: I gained a deeper understanding of Go’s concurrency model, focusing
-          on creating abstractions that simplify parallel execution while maintaining performance and safety.
-        </li>
-        <li>
-          <strong>API Design</strong>: I discovered the value of creating a user-friendly API, balancing simplicity with
-          powerful functionality to make parallel execution accessible to users of all levels.
-        </li>
-        <li>
-          <strong>Robust Error Handling</strong>: I emphasized the need for strong error handling to manage edge cases
-          and ensure reliable outcomes across various parallel tasks.
-        </li>
-      </ul>
+<!--      <h2 class="section-subheading">Lessons Learned</h2>-->
+<!--      <ul>-->
+<!--        <li>-->
+<!--          <strong>Generalization with Generics</strong>: I learned the importance of properly designing and testing for-->
+<!--          generalization in methods, ensuring the package could handle a wide range of use cases efficiently.-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <strong>Concurrency Management</strong>: I gained a deeper understanding of Go’s concurrency model, focusing-->
+<!--          on creating abstractions that simplify parallel execution while maintaining performance and safety.-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <strong>API Design</strong>: I discovered the value of creating a user-friendly API, balancing simplicity with-->
+<!--          powerful functionality to make parallel execution accessible to users of all levels.-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <strong>Robust Error Handling</strong>: I emphasized the need for strong error handling to manage edge cases-->
+<!--          and ensure reliable outcomes across various parallel tasks.-->
+<!--        </li>-->
+<!--      </ul>-->
 
-      <h1 class="section-heading">Future Improvements</h1>
-      <h2 class="section-subheading">Planned Enhancements</h2>
-      <ul>
-        <li>
-          <strong>Generic Method Signatures</strong>: Simplify the usage by implementing a generic signature for all
-          types of methods, reducing confusion and streamlining the process.
-        </li>
-      </ul>
+<!--      <h1 class="section-heading">Future Improvements</h1>-->
+<!--      <h2 class="section-subheading">Planned Enhancements</h2>-->
+<!--      <ul>-->
+<!--        <li>-->
+<!--          <strong>Generic Method Signatures</strong>: Simplify the usage by implementing a generic signature for all-->
+<!--          types of methods, reducing confusion and streamlining the process.-->
+<!--        </li>-->
+<!--      </ul>-->
     </div>
   </div>
 </div>
