@@ -1,0 +1,29 @@
+#project-link {
+    display: block;
+    color: #7038ff;
+    padding: 5px 0;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 1.25em;
+    margin: 0 0 0 25px;
+    transition: 0.3s;
+}
+
+#project-link:hover {
+    color: #c6c7ff;
+}
+
+#project-image {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space between image and button */
+}
+
+.image-container {
+    padding: 10px;
+    text-align: center; /* Center the content horizontally */
+}
+
+body {
+    font-family: 'Epilogue', sans-serif;
+}
